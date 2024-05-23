@@ -1,0 +1,15 @@
+{
+    "name": "nikola/router",
+    "autoload": {
+        "psr-4": {
+            "Nikola\\Router\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nikola Stankovic",
+            "email": "jonnywintech@gmail.com"
+        }
+    ],
+    "require": {}
+}
