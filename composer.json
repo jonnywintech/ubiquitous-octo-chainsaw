@@ -2,7 +2,7 @@
     "name": "nikola/router",
     "autoload": {
         "psr-4": {
-            "Nikola\\Router\\": "src/"
+            "App\\": "app/"
         }
     },
     "authors": [
