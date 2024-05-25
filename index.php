@@ -10,9 +10,14 @@ $router = new Router();
 
 
 $router
-->register('/', [HomeController::class, 'index'])
-->register('/invoices',[ InvoiceController::class, 'index'])
-->register('/invoices/create',[ InvoiceController::class, 'create']);
+    ->get('/', [HomeController::class, 'index'])
+    ->get('/invoices', [InvoiceController::class, 'index'])
+    ->get('/invoices/create', [InvoiceController::class, 'create'])
+    ->post('/invoices/create', [InvoiceController::class, 'store'])
+    ->get('/invoices/delete', [InvoiceController::class, 'delete'])
+    ->delete('/invoices/destroy', [InvoiceController::class, 'destroy']);
 
 
-echo $router->resolve($_SERVER['REQUEST_URI']);
+echo $router->resolve($_POST['_method'] ?? strtolower($_SERVER['REQUEST_METHOD']), $_SERVER['REQUEST_URI']);
+
+// dd($router->routes());
