@@ -4,7 +4,7 @@ use App\Controllers\HomeController;
 use App\Controllers\InvoiceController;
 use App\Router\Router;
 
-require './vendor/autoload.php';
+require '../vendor/autoload.php';
 
 $router = new Router();
 
