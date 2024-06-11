@@ -52,7 +52,7 @@ class Router
 
     public function resolve(string $requestMethod, string $requestUri)
     {
-        var_dump($requestMethod);
+        // var_dump($requestMethod);
         $route = explode('?', $requestUri)[0];
         $action = $this->routes[$requestMethod][$route] ?? null;
 

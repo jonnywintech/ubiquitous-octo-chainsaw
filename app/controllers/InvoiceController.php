@@ -8,7 +8,6 @@ class InvoiceController {
 
     public function index (): string
     {
-        dd($_GET);
         return 'Invoice';
     }
 
