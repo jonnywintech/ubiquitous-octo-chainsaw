@@ -78,8 +78,28 @@ if (!function_exists('dd')) {
               </script></div></body></html>';
         die(1);
     }
+}
 
+if (!function_exists('ddd')) {
+    function ddd(...$vars)
+    {
+        header('Content-Type: text/html');
+        echo '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Debug Dump</title><style>
+    body { font-family: "Courier New", Courier, monospace; background: #2e2d2c; color: #0f0; }
+    .container { margin: 20px; }
+    .dump-output { background: #1d1d1d; color: #0f0; padding: 10px; border: 1px solid #0f0; }
+    </style></head><body><div class="container">';
 
+        echo '<div class="dump-output">';
+        foreach ($vars as $var) {
+            echo '<pre>';
+            var_dump($var);
+            echo '</pre>';
+        }
+        echo '</div>';
+        echo '</div></body></html>';
+        die(1);
+    }
 }
 
 if (!function_exists('dump')) {
@@ -157,14 +177,12 @@ if (!function_exists('dump')) {
                 }
               </script></div></body></html>';
     }
-
-
 }
 
 if (!function_exists('form_method')) {
     function form_method(string $method): string
     {
         $method = strtolower($method);
-        return '<input type="hidden" name="_method" value="'. $method. '">';
+        return '<input type="hidden" name="_method" value="' . $method . '">';
     }
 }
