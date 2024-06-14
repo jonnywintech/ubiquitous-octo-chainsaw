@@ -8,6 +8,7 @@ class HomeController {
 
     public function index (): string
     {
+
         return 'HOME';
     }
 
