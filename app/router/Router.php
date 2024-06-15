@@ -5,19 +5,18 @@ declare(strict_types=1);
 namespace App\Router;
 
 use App\Exceptions\RouteNotFoundException;
-use App\Middleware\Middleware;
+
 
 class Router
 {
 
     private array $routes = array();
-    private array $middlewares = array();
 
 
     public function register(string $requestMethod, string $route, callable|array $action): self
     {
-        $this->routes[$requestMethod][$route] = ['action'=>$action,
-                                                 'middleware' => ['guest']];
+        $this->routes[$requestMethod][$route]['action'] = $action;
+        $this->routes[$requestMethod][$route]['middlewares'] = [];
         return $this;
     }
 
@@ -58,13 +57,6 @@ class Router
         // var_dump($requestMethod);
         $route = explode('?', $requestUri)[0];
         $action = $this->routes[$requestMethod][$route]['action'] ?? null;
-
-        $middlewares = $this->routes[$requestMethod][$route]['middleware'] ?? null;
-
-        foreach ($middlewares as $middleware) {
-            $middleware = new $middleware();
-            $action = $middleware->handle($action);
-        }
         
 
         if (!$action) {

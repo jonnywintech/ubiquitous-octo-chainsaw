@@ -19,8 +19,8 @@ class AuthController
     }
 
     public function login(){
-        echo "<pre>";
-        var_dump($_REQUEST);
-        echo "</pre>";
+        
+        dump($_REQUEST);
+        
     }
 }
