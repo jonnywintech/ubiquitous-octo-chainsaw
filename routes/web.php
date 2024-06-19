@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Controllers\AuthController;
-use App\Router\Router;
+use App\Core\Router\Router;
 use App\Controllers\HomeController;
 use App\Controllers\InvoiceController;
 use App\Middleware\AuthMiddleware;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Router;
+namespace App\Core\Router;
 
 use App\Exceptions\RouteNotFoundException;
 use Exception;

@@ -4,18 +4,14 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Core\View\View;
+
 class AuthController
 {
 
     public function index()
     {
-        return " 
-        <form action='/login' method='POST'>
-        <input type='text' name='username' id='' placeholder='username'>
-        <input type='password' name='password' id='' placeholder='************'>
-        
-        <button>login</button>
-        </form>";
+       return View::render('Auth.Login.index');
     }
 
     public function login(){

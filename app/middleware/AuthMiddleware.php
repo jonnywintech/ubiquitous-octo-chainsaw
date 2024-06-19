@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Middleware;
 
-use App\Middleware\Middleware;
+use App\Core\Middleware\Middleware;
 
 class AuthMiddleware extends Middleware
 {

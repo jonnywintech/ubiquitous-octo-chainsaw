@@ -5,7 +5,7 @@
             "App\\": "app/"
         },
         "files": [
-            "helpers/dump.php"
+            "helpers/form_method.php"
         ]
     },
     "authors": [

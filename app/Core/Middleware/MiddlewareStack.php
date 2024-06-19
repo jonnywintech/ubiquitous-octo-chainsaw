@@ -1,7 +1,9 @@
 <?php
 
-use App\Middleware\Middleware;
-use App\Router\Router;
+namespace App\Core\Middleware;
+
+use App\Core\Middleware\Middleware;
+use App\Core\Router\Router;
 
 class MiddlewareStack
 {
