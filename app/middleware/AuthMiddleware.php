@@ -10,17 +10,13 @@ class AuthMiddleware extends Middleware
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  array  $request
-     * @param  callable  $next
+
      */
-    public function handle(array $request, callable $next)
+    public function handle()
     {
         if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit;
         }
-
-        return $next($request);
     }
 }

@@ -8,9 +8,6 @@ abstract class Middleware
 {
     /**
      * Handle an incoming request.
-     *
-     * @param  array  $request
-     * @param  callable  $next
      */
-    abstract public function handle(array $request, callable $next);
+    abstract public function handle();
 }

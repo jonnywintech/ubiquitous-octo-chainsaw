@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Router;
 
 use App\Exceptions\RouteNotFoundException;
-
+use Exception;
 
 class Router
 {
@@ -52,15 +52,35 @@ class Router
         return $this->routes;
     }
 
+    public function middleware($key)
+    {
+        $route = &$this->routes[array_key_last($this->routes)];
+        $url_key = array_key_last($route);
+        $middlewares = $route[$url_key]['middlewares'][] = $key;
+        // dd($this->routes);
+    }
+
     public function resolve(string $requestMethod, string $requestUri)
     {
         // var_dump($requestMethod);
         $route = explode('?', $requestUri)[0];
         $action = $this->routes[$requestMethod][$route]['action'] ?? null;
-        
+        $middlewares =  $this->routes[$requestMethod][$route]['middlewares'];
 
         if (!$action) {
             throw new RouteNotFoundException();
+        }
+
+
+        if($middlewares !== []){
+            foreach($middlewares as $middleware){
+                if(!class_exists($middleware)){
+                    throw new Exception('middleware class not found');
+                }
+
+                $class = new $middleware();
+                $class->handle();
+            }
         }
 
         if (is_callable($action)) {
