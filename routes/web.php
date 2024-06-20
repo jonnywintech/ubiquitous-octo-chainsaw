@@ -2,17 +2,18 @@
 
 declare(strict_types=1);
 
-use App\Controllers\AuthController;
 use App\Core\Router\Router;
-use App\Controllers\HomeController;
-use App\Controllers\InvoiceController;
 use App\Middleware\AuthMiddleware;
+use App\Controllers\AuthController;
+use App\Controllers\HomeController;
+use App\Middleware\GuestMiddleware;
+use App\Controllers\InvoiceController;
 
 $router = new Router();
 
 
-$router->get('/', [HomeController::class, 'index'])->middleware(AuthMiddleware::class);
-$router->get('/login', [AuthController::class, 'index']);
+$router->get('/', [HomeController::class, 'index']);
+$router->get('/login', [AuthController::class, 'index'])->middleware(GuestMiddleware::class);
 $router->post('/login', [AuthController::class, 'login']);
 $router->get('/invoices', [InvoiceController::class, 'index']);
 $router->get('/invoices/create', [InvoiceController::class, 'create']);

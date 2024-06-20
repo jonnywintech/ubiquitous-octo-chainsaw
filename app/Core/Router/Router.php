@@ -65,7 +65,7 @@ class Router
         // var_dump($requestMethod);
         $route = explode('?', $requestUri)[0];
         $action = $this->routes[$requestMethod][$route]['action'] ?? null;
-        $middlewares =  $this->routes[$requestMethod][$route]['middlewares'];
+        $middlewares =  $this->routes[$requestMethod][$route]['middlewares'] ?? null;
 
         if (!$action) {
             throw new RouteNotFoundException();

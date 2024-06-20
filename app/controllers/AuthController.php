@@ -11,12 +11,30 @@ class AuthController
 
     public function index()
     {
-       return View::render('Auth.Login.index');
+        return View::render('Auth.Login.index');
     }
 
-    public function login(){
+    public function login()
+    {
+
+        session_start();
+
+        if (isset($_COOKIE['user'])){
+            dd('user_exist', $_COOKIE['user']);
+        }
+
+        $generated_hash = openssl_random_pseudo_bytes(128);
+
+        setcookie('user', $generated_hash, time()+(60*60));
+        // dd($_REQUEST);
+    }
+
+    public function logout()
+    {
+        session_unset();
         
-        dump($_REQUEST);
-        
+
+        header('Location: /login');
+        die();
     }
 }
