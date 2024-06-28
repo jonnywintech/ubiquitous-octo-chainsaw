@@ -11,7 +11,12 @@ class AuthController
 
     public function index()
     {
-        return View::render('Auth.Login.index');
+        return View::render('auth.login.index');
+    }
+
+    public function create()
+    {
+        return View::render('auth.login.create');
     }
 
     public function login()
