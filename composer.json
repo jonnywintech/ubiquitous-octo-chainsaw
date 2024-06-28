@@ -6,7 +6,8 @@
         },
         "files": [
             "helpers/form_method.php",
-            "helpers/root_dir.php"
+            "helpers/root_dir.php",
+            "helpers/load_env.php"
         ]
     },
     "authors": [

@@ -15,6 +15,7 @@ $router = new Router();
 $router->get('/', [HomeController::class, 'index']);
 $router->get('/login', [AuthController::class, 'index'])->middleware(GuestMiddleware::class);
 $router->post('/login', [AuthController::class, 'login'])->middleware(GuestMiddleware::class);
+$router->post('/register', [AuthController::class, 'create'])->middleware(GuestMiddleware::class);
 $router->get('/invoices', [InvoiceController::class, 'index']);
 $router->get('/invoices/create', [InvoiceController::class, 'create']);
 $router->post('/invoices/create', [InvoiceController::class, 'store']);

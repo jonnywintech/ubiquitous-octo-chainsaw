@@ -10,6 +10,7 @@ class HomeController {
 
     public function index (): string
     {
+        dd(getenv('DB_HOST'), $_ENV);
        return View::render('pages.home.index');
     }
 
