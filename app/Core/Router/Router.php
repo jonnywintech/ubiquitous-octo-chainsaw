@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Core\Router;
 
-use App\Exceptions\RouteNotFoundException;
 use Exception;
+use App\Core\View\View;
+use App\Exceptions\RouteNotFoundException;
+use App\Core\Http\Response;
 
 class Router
 {
@@ -68,13 +70,14 @@ class Router
         $middlewares =  $this->routes[$requestMethod][$route]['middlewares'] ?? null;
 
         if (!$action) {
-            throw new RouteNotFoundException();
+            Response::setStatusCode(404);
+            return View::render('errors._404');
         }
 
 
-        if($middlewares !== []){
-            foreach($middlewares as $middleware){
-                if(!class_exists($middleware)){
+        if ($middlewares !== []) {
+            foreach ($middlewares as $middleware) {
+                if (!class_exists($middleware)) {
                     throw new Exception('middleware class not found');
                 }
 
