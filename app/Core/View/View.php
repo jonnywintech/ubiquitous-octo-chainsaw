@@ -12,17 +12,24 @@ class View
 
         extract($data);
 
-        ob_start();
-        require __DIR__ . '/../../View/' . $view . '.php';
-        $content = ob_get_clean();
-
-        
-        ob_start();
-        require __DIR__ . '/../../View/Template/Bootstrap.php';
-        $base_view = ob_get_clean();
-
+        $base_view = self::layoutContent();
+        $content = self::viewOnly($view);
         $output = str_replace('{{content}}', $content, $base_view);
 
         return $output;
+    }
+
+    protected static function viewOnly(string $view): mixed
+    {
+        ob_start();
+        require_once rootDir() . "/app/View/{$view}.php";
+        return ob_get_clean();
+    }
+
+    protected static function layoutContent(string $layout = 'Bootstrap'): mixed
+    {
+        ob_start();
+        require_once rootDir() . "/app/View/Template/{$layout}.php";
+        return ob_get_clean();
     }
 }
