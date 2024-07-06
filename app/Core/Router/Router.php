@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Core\Router;
 
+use App\Core\Http\Request;
 use Exception;
 use App\Core\View\View;
 use App\Exceptions\RouteNotFoundException;
@@ -13,7 +14,15 @@ class Router
 {
 
     private array $routes = array();
+    private Request $request;
+    private Response $response;
 
+
+    public function __construct()
+    {
+        $this->request = new Request();
+        $this->response = new Response();
+    }
 
     public function register(string $requestMethod, string $route, callable|array $action): self
     {
@@ -98,7 +107,7 @@ class Router
             }
 
             if (method_exists($class, $method)) {
-                return call_user_func_array([$class, $method], []);
+                return call_user_func_array([$class, $method],[$this->request, $this->response]);
             }
         }
 

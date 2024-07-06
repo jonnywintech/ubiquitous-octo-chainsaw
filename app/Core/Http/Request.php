@@ -6,9 +6,11 @@ class Request
 {
     public array $data;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->data = $this->getBody();
     }
+
     public function getMethod(): string
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
@@ -25,15 +27,25 @@ class Request
 
         if ($this->getMethod() === 'get') {
             foreach ($_GET as $key => $value) {
-                $_GET[$key] = filter_input(INPUT_GET, $value, FILTER_SANITIZE_SPECIAL_CHARS);
+                $body[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
         if ($this->getMethod() === 'post') {
             foreach ($_POST as $key => $value) {
-                $_POST[$key] = filter_input(INPUT_POST, $value, FILTER_SANITIZE_SPECIAL_CHARS);
+                $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
 
         return $body;
+    }
+
+    public function get(string $key, $default = null)
+    {
+        return $this->data[$key] ?? $default;
+    }
+
+    public function all(): array
+    {
+        return $this->data;
     }
 }

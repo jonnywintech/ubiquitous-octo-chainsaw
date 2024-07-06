@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+use App\Core\Http\Request;
 use App\Core\View\View;
 
 class AuthController
@@ -19,7 +20,7 @@ class AuthController
         return View::render('auth.login.create');
     }
 
-    public function login()
+    public function login(Request $request)
     {
 
         session_start();

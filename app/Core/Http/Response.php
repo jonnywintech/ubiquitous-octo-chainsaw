@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Core\Http;
 
-class Response 
-{    
+class Response
+{
     /**
      * Method setStatusCode
      *
@@ -13,8 +13,13 @@ class Response
      *
      * @return void
      */
-    public static function setStatusCode(int $status): void
+    public static function setStatusCode(int $status = 200): void
     {
         http_response_code($status);
+    }
+
+    public static function redirect(string $url): void
+    {
+        header("Location: {$url}");
     }
 }
