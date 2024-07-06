@@ -12,12 +12,17 @@ class AuthController
 
     public function index()
     {
-        return View::render('auth.login.index');
+        return View::render('auth.index');
     }
 
     public function create()
     {
-        return View::render('auth.login.create');
+        return View::render('auth.create');
+    }
+
+    public function store(Request $request)
+    {
+        dd($request);
     }
 
     public function login(Request $request)
@@ -38,7 +43,6 @@ class AuthController
     public function logout()
     {
         session_unset();
-        
 
         header('Location: /login');
         die();
