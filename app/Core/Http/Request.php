@@ -48,4 +48,9 @@ class Request
     {
         return $this->data;
     }
+
+    public function only(...$keys)
+    {
+        return array_intersect_key($this->data, array_flip($keys));
+    }
 }

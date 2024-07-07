@@ -22,7 +22,7 @@ class AuthController
 
     public function store(Request $request)
     {
-        dd($request);
+        dd($request->only('first_name', 'last_name', 'email'));
     }
 
     public function login(Request $request)
