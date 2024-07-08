@@ -5,17 +5,18 @@ declare(strict_types=1);
 namespace App\Core\Model;
 
 use PDO;
+use App\Core\Database\Database;
 
 abstract class Model
 {
     protected string $table;
     protected array $data = [];
-    protected PDO $db;
+    protected ?PDO $db = null;
 
     public function __construct()
     {
-        $this->db = Database::getInstance();
         $this->table = strtolower((new \ReflectionClass($this))->getShortName());
+        $this->db = Database::getInstance()->getConnection();
     }
 
     public function find(int $id): ?object

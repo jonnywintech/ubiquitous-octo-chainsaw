@@ -12,7 +12,8 @@ class HomeController {
 
     public function index (Request $request): string
     {        
-        $adfasd= new Test();
+        $test= new Test();
+        // dd($test->all());
        return View::render('pages.home.index');
     }
 

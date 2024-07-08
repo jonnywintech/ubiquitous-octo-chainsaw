@@ -14,10 +14,10 @@ class Database
 
     private function __construct()
     {
-       $dbname = loadEnv('DB_NAME') ?? '';
-       $host = loadEnv('DB_HOST') ?? '';
-       $username = loadEnv('DB_USERNAME') ?? '';
-       $password = loadEnv('DB_PASSWORD') ?? '';
+        $host = getenv('DB_HOST') ?: 'localhost';
+        $dbname = getenv('DB_DATABASE') ?: '';
+        $username = getenv('DB_USERNAME') ?: '';
+        $password = getenv('DB_PASSWORD') ?: '';
         
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
 
@@ -25,7 +25,7 @@ class Database
             $this->connection = new PDO($dsn, $username, $password);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            throw new PDOException("Connection failed: ". $e->getMessage());
+            throw new PDOException("Connection failed: " . $e->getMessage());
         }
     }
 
@@ -43,3 +43,5 @@ class Database
         return $this->connection;
     }
 }
+
+?>
