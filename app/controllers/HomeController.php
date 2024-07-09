@@ -13,7 +13,9 @@ class HomeController {
     public function index (Request $request): string
     {        
         $test= new Test();
-        // dd($test->all());
+        $test->select('first_name')->where('last_name', 'Stankovic')->where('first_name', 'Nikola' , '!=')->get()->first();
+        // dd($test->toSql());
+        dd($test);
        return View::render('pages.home.index');
     }
 
