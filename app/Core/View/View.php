@@ -18,12 +18,10 @@ class View
         // Replace dots with slashes to support dot notation in view paths.
         $view = str_replace('.', '/', $view);
 
-        // Extract the data array to variables.
-        extract($data);
-
         // Get the layout content and the view content.
         $base_view = self::layoutContent();
-        $content = self::viewOnly($view);
+
+        $content = self::viewOnly($view, $data);
 
         // Replace the content placeholder in the layout with the actual content.
         $output = str_replace('{{content}}', $content, $base_view);
@@ -37,10 +35,13 @@ class View
      * @param string $view The view file path.
      * @return string The view content.
      */
-    protected static function viewOnly(string $view): string
+    protected static function viewOnly(string $view, $data): string
     {
         ob_start();
         require_once rootDir() . "/app/views/{$view}.php";
+
+        // Extract the data array to variables.
+        extract($data);
         return ob_get_clean();
     }
 
